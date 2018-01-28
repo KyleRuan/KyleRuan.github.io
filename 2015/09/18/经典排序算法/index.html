@@ -1,0 +1,290 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="kyleruan"><title>经典排序算法 · Dev && Football</title><meta name="description" content="按照是否将元素放入到内存中，排序分为内部排序和外部排序。内部排序适合元素不多的文件，按照元素的排序原则，内部排序分为：
+
+插入排序
+交换排序
+选择排序
+归并排序
+
+插入排序基本方法是：寻找一个指定元素在待排序元素中的位置，然后将它插入
+直接插入基本思想：每次将一个待排序的元素按其关键码的大小插入到一"><meta name="keywords"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Dev &amp;&amp; Football</a></h3><div class="description"><p>iOS Developer fullstack Blog</p></div></div></div><ul class="social-links"></ul><div class="footer"><a target="_blank" href="/"><span>Theme by </span></a><a href="https://www.caicai.me"> CaiCai </a><span>&</span><a href="https://github.com/Ben02/hexo-theme-Anatole"> Ben</a><div class="by_farbox"><a href="https://hexo.io/zh-cn/" target="_blank">Proudly published with Hexo&#65281;</a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">Home</a></li><li><a href="/about">Sobre</a></li><li><a href="/archives">Arquivo</a></li><li><a href="/links">Links</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div><div class="avatar"><img></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>经典排序算法</a></h3></div><div class="post-content"><p>按照是否将元素放入到内存中，排序分为内部排序和外部排序。内部排序适合元素不多的文件，按照元素的排序原则，内部排序分为：</p>
+<ol>
+<li>插入排序</li>
+<li>交换排序</li>
+<li>选择排序</li>
+<li>归并排序</li>
+</ol>
+<h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><p>基本方法是：寻找一个指定元素在待排序元素中的位置，然后将它插入</p>
+<h3 id="直接插入"><a href="#直接插入" class="headerlink" title="直接插入"></a>直接插入</h3><p>基本思想：每次将一个待排序的元素按其关键码的大小插入到一个已经排好序的有序序列中，知道全部元素排序好。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert_sort</span><span class="params">(<span class="keyword">int</span> arr[], <span class="keyword">int</span> len)</span></span>&#123;</span><br><span class="line"> <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;len; i++) &#123;</span><br><span class="line">    <span class="keyword">int</span> temp = arr[i] ;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = i<span class="number">-1</span>; j&gt;=<span class="number">0</span>; j--) &#123;</span><br><span class="line">      <span class="comment">//j+1位置一直是空的，</span></span><br><span class="line">        <span class="keyword">if</span> (arr[j]&gt;temp) &#123;</span><br><span class="line">            arr[j+<span class="number">1</span>] = arr[j] ;</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            arr[j+<span class="number">1</span>] = temp ;</span><br><span class="line">            <span class="keyword">break</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<p>直接插入的两个特点： 基本有序的序列，直接插入最快。 记录个数很少的无序序列，直接插入也很快</p>
+<h3 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h3><p>希尔排序是对直接插入排序的一种改进。它的基本思想是：将待排序的元素分成多个子集，分别对这些子集进行直接插入排序，待整个序列都有序时，再对元素进行一次直接插入排序。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">   <span class="keyword">void</span> Sort::shell_sort(<span class="keyword">int</span> arr[] ,<span class="keyword">int</span> len) &#123;</span><br><span class="line"><span class="comment">//增长区间</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> d = len /<span class="number">2</span>; d&gt;=<span class="number">1</span>; d = d/<span class="number">2</span>)</span><br><span class="line">&#123;   <span class="comment">//一次希尔排序</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = d; i &lt; len; i++)</span><br><span class="line">	&#123; 	 <span class="comment">//和有序的数组的最后一个元素比较</span></span><br><span class="line">           <span class="keyword">if</span> (arr[i]&lt;arr[i-d])</span><br><span class="line">           &#123;</span><br><span class="line">               <span class="keyword">int</span> temp = arr[i] ;</span><br><span class="line">           	<span class="keyword">int</span> j = i-d ;</span><br><span class="line">           	<span class="keyword">while</span>(j&gt;=<span class="number">0</span>&amp;&amp;arr[j]&gt;temp)&#123;</span><br><span class="line">                   arr[j+d] = arr[j];</span><br><span class="line">                   j = j-d;</span><br><span class="line">           	&#125;</span><br><span class="line">           	arr[j+d] = temp ;</span><br><span class="line">           &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="交换排序"><a href="#交换排序" class="headerlink" title="交换排序"></a>交换排序</h2><p>交换排序的基本方法是：在待排序的元素中选择两个元素，将他们的关键码进行比较，进行排序。</p>
+<h3 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h3><p>基本思想是：两两比较相邻的元素，如果反序，则交换位置，直到没有反序的元素为止。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bubble_sort</span><span class="params">(<span class="keyword">int</span> arr[], <span class="keyword">int</span> len)</span></span>&#123;</span><br><span class="line"><span class="comment">//从小到大</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;len; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = len<span class="number">-1</span>; j&gt;i; j--) &#123;</span><br><span class="line">        <span class="keyword">if</span> (arr[j]&lt;arr[j<span class="number">-1</span>]) &#123;</span><br><span class="line">            <span class="keyword">int</span> temp = arr[j] ;</span><br><span class="line">            arr[j] = arr[j<span class="number">-1</span>] ;</span><br><span class="line">            arr[j<span class="number">-1</span>] = temp ;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h3><p>快速排序是冒泡排序的改进算法，快速排序元素的比较设移动是序列的两端到中间进行的。它的基本思想是：<br>在分区中选择一个元素为轴值，将待排序的元素划分为两个分区，左侧元素的关键码都小于或者等于轴值，右侧元素的关键码的值都大于或者等于轴值。重复上述过程，直到整个序列有序。</p>
+<pre><code>void quick_sort(int arr[], int left, int right){
+//递归结束条件
+if (left&lt;right) {
+    //一次遍历
+    int i = left , j = right , key = arr[left] ;
+     while (i&lt;j) {
+           while (i&lt;j&amp;&amp;arr[j]&gt;key) 
+        j-- ;
+        if (i&lt;j)
+        arr[i++] =arr[j];
+        while (i&lt;j&amp;&amp; arr[i]&lt;key)
+        i++ ;
+        if (i&lt;j) 
+        arr[j--] = arr[i] ; 
+     }
+    //递归
+    arr[i]=key ;
+    quick_sort(arr, left, i-1);
+    quick_sort(arr, i+1, right); 
+}
+
+}
+</code></pre><h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h2><p>选择排序的基本思想是：每趟排序在待排序列表中选择关键码最小的元素，顺序添加到已将排序好的有序序列中去，直到全部记录都排序完成</p>
+<h3 id="简单选择排序"><a href="#简单选择排序" class="headerlink" title="简单选择排序"></a>简单选择排序</h3><p>简单选择排序的基本思想是：每趟在待排序的序列中找出最小的记录加到序列头部。直到都排序完成。</p>
+<pre><code>void select_sort(int arr[], int len){
+for (int i= 0; i&lt;len-1; i++) {
+        int temp = i ;
+    for (int j=i+1; j&lt;len; j++) {
+        if(arr[j]&lt;arr[temp]){
+            temp = j ;
+        }
+    }
+    if (temp != i) {
+        int arrTemp = arr[i] ;
+        arr[i] = arr[temp] ;
+        arr[temp] =arrTemp ;
+    }
+}
+}
+</code></pre><h3 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h3><p>堆排序是对简单选择排序的改进。堆排序利用了前一趟比较的结果，减小了比较的次数，从而提高整个排序的效率。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">    <span class="comment">//调整堆</span></span><br><span class="line">    <span class="keyword">void</span> Sort::heap_adjust(<span class="keyword">int</span> arr[], <span class="keyword">int</span> i, <span class="keyword">int</span> len)&#123;</span><br><span class="line">    <span class="keyword">int</span> child = <span class="number">2</span> * i + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> temp;</span><br><span class="line">    <span class="keyword">while</span> (child&lt;len) &#123;</span><br><span class="line">     <span class="comment">// 得到子结点中键值较大的结点 这里求的是大根堆, 如果是小根堆，下面变为arr[child + 1] &lt; arr[child]</span></span><br><span class="line">        <span class="keyword">if</span> (child &lt; len - <span class="number">1</span> &amp;&amp; arr[child + <span class="number">1</span>]&gt;arr[child])</span><br><span class="line">            child ++;</span><br><span class="line">        <span class="comment">//这里求的是大根堆，如果求小根堆arr[i] &gt; arr[child]</span></span><br><span class="line">        <span class="keyword">if</span> (arr[i] &lt;arr[child])</span><br><span class="line">        &#123;</span><br><span class="line">            temp = arr[i];</span><br><span class="line">            arr[i] = arr[child];</span><br><span class="line">            arr[child] = temp;</span><br><span class="line">            i =child ;</span><br><span class="line">            child = <span class="number">2</span> * i + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;   </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//堆排序</span></span><br><span class="line">    <span class="keyword">void</span> Sort::heap_sort(<span class="keyword">int</span> arr[], <span class="keyword">int</span> len)&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="comment">// 调整序列的前半部分元素，调整完之后第一个元素是序列的最大的元素</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = len / <span class="number">2</span> - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)</span><br><span class="line">    &#123;</span><br><span class="line">        heap_adjust(arr, i, len);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (i = len - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> temp = arr[<span class="number">0</span>];</span><br><span class="line">        arr[<span class="number">0</span>] = arr[i];</span><br><span class="line">        arr[i] = temp;</span><br><span class="line">        <span class="comment">// 不断缩小调整heap的范围，每一次调整完毕保证第一个元素是当前序列的最大值</span></span><br><span class="line">        heap_adjust(arr, <span class="number">0</span>, i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><p>归并排序的基本思想方法是：将两个或者两个以上的有序序列归并成一个有序序列<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> arr[], <span class="keyword">int</span> temp_arr[], <span class="keyword">int</span> start_index, <span class="keyword">int</span> mid_index, <span class="keyword">int</span> end_index)</span></span>&#123;</span><br><span class="line"><span class="keyword">int</span> i=start_index;</span><br><span class="line"><span class="keyword">int</span> k=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> j=mid_index+<span class="number">1</span> ;</span><br><span class="line"></span><br><span class="line"><span class="comment">//直到一个组数被遍历完</span></span><br><span class="line"><span class="keyword">while</span> (i&lt;mid_index+<span class="number">1</span> &amp;&amp; j&lt;<span class="number">1</span>+end_index) &#123;</span><br><span class="line">    <span class="keyword">if</span> (arr[i]&gt;arr[j]) &#123;</span><br><span class="line">        temp_arr[k++] =arr[j++];</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        temp_arr[k++] =arr[i++];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//将没被遍历完的数组添加到数组中去</span></span><br><span class="line"><span class="keyword">while</span> (i&lt;<span class="number">1</span>+mid_index) &#123;</span><br><span class="line">    temp_arr[k++]= arr[i++];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (j&lt;<span class="number">1</span>+end_index) &#123;</span><br><span class="line">    temp_arr[k++] =arr[j++];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>, j = start_index; j &lt;<span class="number">1</span>+end_index; i ++, j ++)</span><br><span class="line">     arr[j] = temp_arr[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge_sort</span><span class="params">(<span class="keyword">int</span> arr[], <span class="keyword">int</span> arr_temp[],<span class="keyword">int</span> start_index, <span class="keyword">int</span> end_index)</span></span>&#123;</span><br><span class="line"><span class="keyword">if</span> (start_index&lt;end_index) &#123;</span><br><span class="line">    <span class="keyword">int</span> mid = (start_index+end_index)/<span class="number">2</span> ;</span><br><span class="line">    merge_sort(arr, arr_temp, start_index, mid);</span><br><span class="line">    merge_sort(arr, arr_temp, mid+<span class="number">1</span>, end_index);</span><br><span class="line">    merge(arr, arr_temp, start_index, mid, end_index);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="排序的比较"><a href="#排序的比较" class="headerlink" title="排序的比较"></a>排序的比较</h2><table>
+<thead>
+<tr>
+<th>排序方法</th>
+<th>平均复杂度</th>
+<th>空间复杂度</th>
+<th>稳定性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>直接插入排序</td>
+<td>O(n<sup>2</sup>)</td>
+<td>O(1)</td>
+<td>稳定 </td>
+</tr>
+<tr>
+<td>希尔排序</td>
+<td>O(nlog<sub>2</sub>n)</td>
+<td>O(1)</td>
+<td>不稳定</td>
+</tr>
+<tr>
+<td>冒泡排序</td>
+<td>O(n<sup>2</sup>)</td>
+<td>O(1)</td>
+<td>稳定   </td>
+</tr>
+<tr>
+<td>快速排序</td>
+<td>O(nlog<sub>2</sub>n)</td>
+<td>O(nlog<sub>2</sub>n)</td>
+<td>不稳定</td>
+</tr>
+<tr>
+<td>简单选择排序   O(n<sup>2</sup>)</td>
+<td>O(1)</td>
+<td>稳定</td>
+</tr>
+<tr>
+<td>堆排序</td>
+<td>O(nlog<sub>2</sub>n)</td>
+<td>O(1)</td>
+<td>不稳定</td>
+</tr>
+<tr>
+<td>归并排序</td>
+<td>O(nlog<sub>2</sub>n)</td>
+<td>O(n)</td>
+<td>稳定</td>
+</tr>
+</tbody>
+</table>
+<h2 id="STL中相关排序算法"><a href="#STL中相关排序算法" class="headerlink" title="STL中相关排序算法"></a>STL中相关排序算法</h2><h3 id="所有STL-sort算法函数的名字列表"><a href="#所有STL-sort算法函数的名字列表" class="headerlink" title="所有STL sort算法函数的名字列表:"></a>所有STL sort算法函数的名字列表:</h3><table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>　功能描述 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> sort</td>
+<td>对给定区间所有元素进行排序　　　　</td>
+</tr>
+<tr>
+<td>stable_sort 　　</td>
+<td>　　对给定区间所有元素进行稳定排序</td>
+</tr>
+<tr>
+<td>partial_sort 　　</td>
+<td>　　对给定区间所有元素部分排序</td>
+</tr>
+<tr>
+<td>partial_sort_copy</td>
+<td>对给定区间复制并排序</td>
+</tr>
+<tr>
+<td>nth_element 　　</td>
+<td>　 找出给定区间的某个位置对应的元素</td>
+</tr>
+<tr>
+<td>is_sorted</td>
+<td>判断一个区间是否已经排好序</td>
+</tr>
+<tr>
+<td>partition 　　　</td>
+<td>　    使得符合某个条件的元素放在前面</td>
+</tr>
+<tr>
+<td>stable_partition</td>
+<td>相对稳定的使得符合某个条件的元素放在前面</td>
+</tr>
+</tbody>
+</table>
+<h3 id="比较函数："><a href="#比较函数：" class="headerlink" title="比较函数："></a>比较函数：</h3><p>当你需要按照某种特定方式进行排序时，你需要给sort指定比较函数，否则程序会自动提供给你一个比较函数<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span> &lt; <span class="keyword">int</span> &gt; vect;</span><br><span class="line"></span><br><span class="line">sort(vect.begin(), vect.end());<span class="comment">//此时相当于调用</span></span><br><span class="line"></span><br><span class="line">sort(vect.begin(), vect.end(), less&lt;<span class="keyword">int</span>&gt;() );</span><br></pre></td></tr></table></figure></p>
+<p>sort 中的其他比较函数</p>
+<table>
+<thead>
+<tr>
+<th>equal_to</th>
+<th>相等</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>not_equal_to</td>
+<td>不相等</td>
+</tr>
+<tr>
+<td>less</td>
+<td>小于</td>
+</tr>
+<tr>
+<td>greater</td>
+<td>大于</td>
+</tr>
+<tr>
+<td>less_equal</td>
+<td>小于等于</td>
+</tr>
+<tr>
+<td>greater_equal</td>
+<td>大于等于</td>
+</tr>
+</tbody>
+</table>
+<p>上述例子中系统自己为sort提供了less仿函数。在STL中还提供了其他仿函数，以下是仿函数列表: 不能直接写入仿 函数的名字，而是要写其重载的()函数： less<int>();<br>当你的容器中元 素时一些标准类型（int float char)或者string时，你可以直接使用这些函数模板。但如果你时自己定义的类型或者你需要按照其他方式排序，你可以有两种方法来达到效果：一种是自己写比较函数。另一种是重载类型的’&lt;’操作赋。</int></p>
+<h3 id="全排序："><a href="#全排序：" class="headerlink" title="全排序："></a>全排序：</h3><p>全排序即把所给定范围所有的元素按照大小关系顺序排列。sort采用的是成熟的<strong>“快速排序算法”</strong>(目前大部分STL版本已经不是采用简单的快速排序，而是结合内插排序算法)。复杂度为nlog<sub>2</sub>n。stable_sort采用的是<strong>“归并排序”</strong>，分派足够内存时，其算法复杂度为nlog<sub>2</sub>n, 否则 其复杂度为nlog<sub>2</sub>n*log<sub>2</sub>n，其优点是会保持相等元素之间的相对位置在排序前后保持一致。</p>
+<p>用于全排序的函 数有：</p>
+<ol>
+<li><p><code>void sort(RandomAccessIterator first, RandomAccessIterator last)</code>;</p>
+</li>
+<li><p><code>void sort(RandomAccessIterator first, RandomAccessIterator last,StrictWeakOrdering comp)</code>;</p>
+</li>
+<li><p><code>void stable_sort(RandomAccessIterator first, RandomAccessIterator last)</code>;</p>
+</li>
+<li><p><code>void stable_sort(RandomAccessIterator first, RandomAccessIterator last, StrictWeakOrdering comp)</code>;</p>
+</li>
+</ol>
+<h3 id="局部排序："><a href="#局部排序：" class="headerlink" title="局部排序："></a>局部排序：</h3><p>partial_sort采用的<em>堆排序</em>（heapsort），它在任何情况下的复杂度都是nlog<sub>2</sub>n。</p>
+<p>局部排序其实是为了减少不必要的操作而提供的排序方式。</p>
+<p>其函数原型为：</p>
+<ol>
+<li><p><code>void partial_sort(RandomAccessIterator first, RandomAccessIterator middle,RandomAccessIterator last)</code>;</p>
+</li>
+<li><p><code>void partial_sort(RandomAccessIterator first,RandomAccessIterator middle,RandomAccessIterator last, StrictWeakOrdering comp)</code>;</p>
+</li>
+<li><p><code>RandomAccessIterator partial_sort_copy(InputIterator first, InputIteratorlast,RandomAccessIteratorresult_first,RandomAccessIterator result_last)</code>;</p>
+</li>
+<li><p><code>RandomAccessIterator partial_sort_copy(InputIterator first, InputIteratorlast,RandomAccessIteratorresult_first,RandomAccessIterator result_last, Compare comp)</code>;</p>
+</li>
+</ol>
+<p>例如：班上有1000个学生，我想知道分数最低的5名是哪些人。<br>partial_sort(vect.begin(),vect.begin()+5,vect.end(),less<student>());</student></p>
+<h3 id="nth-element-指定元素排序"><a href="#nth-element-指定元素排序" class="headerlink" title="nth_element 指定元素排序"></a>nth_element 指定元素排序</h3><ol>
+<li><p><code>void nth_element(RandomAccessIterator first, RandomAccessIterator nth, RandomAccessIterator last)</code>;</p>
+</li>
+<li><p><code>void nth_element(RandomAccessIterator first, RandomAccessIterator nth,RandomAccessIterator last,StrictWeakOrdering comp)</code>;</p>
+</li>
+</ol>
+<p>例如：班上有1000个学生，我想知道分数排在倒数第4名的学生。<br>nth_element(vect.begin(), vect.begin()+3, vect.end(),less<student>());</student></p>
+<p>###partition 和stable_partition</p>
+<p>partition就是把一个区间中的元素按照某个条件分成两类，并没有排序。</p>
+<p>其函数原型为：</p>
+<ol>
+<li><p><code>ForwardIterator partition(ForwardIterator first, ForwardIterator last, Predicate pred)</code></p>
+</li>
+<li><p><code>ForwardIterator stable_partition(ForwardIterator first, ForwardIterator last, Predicate pred)</code>;</p>
+</li>
+</ol>
+<p>例如：班上10个学生，计算所有没有及格（低于60分）的学生：</p>
+<pre><code>student exam(&quot;pass&quot;, 60);
+
+stable_partition(vect.begin(), vect.end(), bind2nd(less&lt;student&gt;(), exam));
+</code></pre><h3 id="效率由高到低（耗时由小变大）"><a href="#效率由高到低（耗时由小变大）" class="headerlink" title="效率由高到低（耗时由小变大）"></a>效率由高到低（耗时由小变大）</h3><table>
+<thead>
+<tr>
+<th>partion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>stable_partition</td>
+<td></td>
+</tr>
+<tr>
+<td>nth_element</td>
+<td></td>
+</tr>
+<tr>
+<td>partial_sort</td>
+<td></td>
+</tr>
+<tr>
+<td>sort</td>
+<td></td>
+</tr>
+<tr>
+<td>stable_sort</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="Effective-STL对如何选择排序函数总结的很好："><a href="#Effective-STL对如何选择排序函数总结的很好：" class="headerlink" title="Effective STL对如何选择排序函数总结的很好："></a>Effective STL对如何选择排序函数总结的很好：</h3><ol>
+<li><p>若需对vector, string, deque, 或array容器进行全排序，你可选择sort或stable_sort；</p>
+</li>
+<li><p>若只需对vector, string, deque, 或array容器中取得top n的元素，部分排序partial_sort是首选.</p>
+</li>
+<li><p>若对于vector, string, deque,或array容器，你需要找到第n个位置的元素或者你需要得到top n且不关系top n中的内部顺序，nth_element是最理想的；</p>
+</li>
+<li><p>若你需要从标准序列容器或者array中把满足某个条件 或者不满足某个条件的元素分开，你最好使用partition或stable_partition；</p>
+</li>
+<li><p>若使用的list容器，你可以直接使用partition和stable_partition算法，你可以使用list::sort代替sort和stable_sort排序。</p>
+</li>
+</ol>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2015-09-18</span><i class="fa fa-comment-o"></i><a href="/2015/09/18/经典排序算法/#comments">Comentários</a><i class="fa fa-tag"></i><a class="tag" href="/tags/面试/" title="面试">面试 </a></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank"></a></div><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div><div class="twitter"><a class="fa fa-twitter" href="http://twitter.com/home?status=,kyleruan.github.io/2015/09/18/经典排序算法/,Dev &amp;&amp; Football,经典排序算法,;"></a></div></div><div class="pagination"><ul class="clearfix"></ul></div><a id="comments"></a><div id="disqus_thread"></div><script>var disqus_shortname = 'kyleruan';
+var disqus_identifier = '2015/09/18/经典排序算法/';
+var disqus_title = '经典排序算法';
+var disqus_url = 'kyleruan.github.io/2015/09/18/经典排序算法/';
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><script id="dsq-count-scr" src="//#{theme.disqus}.disqus.com/count.js" async></script></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>
